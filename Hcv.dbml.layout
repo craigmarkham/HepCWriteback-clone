@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 8.625" name="Hcv">
+  <DataContextMoniker Name="/HcvDataContext" />
+  <nestedChildShapes>
+    <classShape Id="39c9891f-3535-4123-8f07-72a68fffecb9" absoluteBounds="1.25, 1.25, 2, 2.7324039713541666">
+      <DataClassMoniker Name="/HcvDataContext/PatientCohort" />
+      <nestedChildShapes>
+        <elementListCompartment Id="e5ae8904-eacc-4d85-a950-0333377389d1" absoluteBounds="1.2650000000000001, 1.71, 1.9700000000000002, 2.1724039713541665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="951b0f81-fd1a-485d-ab2d-f7431ec4fb95" absoluteBounds="1.375, 4.625, 2, 3.6939111328124996">
+      <DataClassMoniker Name="/HcvDataContext/PatientLab" />
+      <nestedChildShapes>
+        <elementListCompartment Id="77deb641-f35e-4095-accc-bd077613234c" absoluteBounds="1.3900000000000001, 5.085, 1.9700000000000002, 3.1339111328125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(2.3125 : 3.98240397135417); (2.3125 : 4.625)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/HcvDataContext/PatientCohort/PatientCohort_PatientLab" />
+      <nodes>
+        <classShapeMoniker Id="39c9891f-3535-4123-8f07-72a68fffecb9" />
+        <classShapeMoniker Id="951b0f81-fd1a-485d-ab2d-f7431ec4fb95" />
+      </nodes>
+    </associationConnector>
+    <classShape Id="60277b6c-f6ac-4747-836d-eac480f5dedf" absoluteBounds="4, 1.375, 2, 2.1554996744791666">
+      <DataClassMoniker Name="/HcvDataContext/PatientMed" />
+      <nestedChildShapes>
+        <elementListCompartment Id="c4088ac9-2424-48c0-9015-e5cddf2dac13" absoluteBounds="4.015, 1.835, 1.9700000000000002, 1.5954996744791665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(3.25 : 2.45274983723958); (4 : 2.45274983723958)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/HcvDataContext/PatientCohort/PatientCohort_PatientMed" />
+      <nodes>
+        <classShapeMoniker Id="39c9891f-3535-4123-8f07-72a68fffecb9" />
+        <classShapeMoniker Id="60277b6c-f6ac-4747-836d-eac480f5dedf" />
+      </nodes>
+    </associationConnector>
+  </nestedChildShapes>
+</ordesignerObjectsDiagram>
