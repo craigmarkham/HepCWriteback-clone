@@ -49,13 +49,22 @@ namespace GICprsLogin {
         protected global::System.Web.UI.WebControls.Label Patient;
         
         /// <summary>
-        /// BiopsyResults control.
+        /// drpWeek control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList BiopsyResults;
+        protected global::System.Web.UI.WebControls.DropDownList drpWeek;
+        
+        /// <summary>
+        /// drpDuration control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList drpDuration;
         
         /// <summary>
         /// drpDrug control.
@@ -67,6 +76,33 @@ namespace GICprsLogin {
         protected global::System.Web.UI.WebControls.DropDownList drpDrug;
         
         /// <summary>
+        /// BiopsyResults control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList BiopsyResults;
+        
+        /// <summary>
+        /// drpPhysical control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList drpPhysical;
+        
+        /// <summary>
+        /// drpMental control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList drpMental;
+        
+        /// <summary>
         /// drpTherapy control.
         /// </summary>
         /// <remarks>
@@ -76,13 +112,13 @@ namespace GICprsLogin {
         protected global::System.Web.UI.WebControls.DropDownList drpTherapy;
         
         /// <summary>
-        /// drpWeek control.
+        /// drpDoses control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList drpWeek;
+        protected global::System.Web.UI.WebControls.DropDownList drpDoses;
         
         /// <summary>
         /// txtboxNote control.
