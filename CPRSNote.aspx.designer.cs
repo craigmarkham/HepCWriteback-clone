@@ -76,13 +76,31 @@ namespace GICprsLogin {
         protected global::System.Web.UI.WebControls.DropDownList drpDrug;
         
         /// <summary>
-        /// BiopsyResults control.
+        /// drpLiverBiopsy control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList BiopsyResults;
+        protected global::System.Web.UI.WebControls.DropDownList drpLiverBiopsy;
+        
+        /// <summary>
+        /// hide control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hide;
+        
+        /// <summary>
+        /// drpBiopsyResults control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList drpBiopsyResults;
         
         /// <summary>
         /// drpPhysical control.

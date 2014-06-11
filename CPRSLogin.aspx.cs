@@ -26,7 +26,7 @@ namespace URF
         protected void Page_Load(object sender, EventArgs e)
         {
            var ID = Request.QueryString["localpid"];
-
+           var PatientSID = Request.QueryString["PatientSID"];
             var localPid = (from pc in db.PatientCohorts
                             where pc.PatientIEN == ID
                             select pc.PatientIEN).First();
@@ -37,7 +37,7 @@ namespace URF
                 if (!(Session["CPRSLogin"] == null))
                 {
                     if (Session["CPRSLogin"].ToString() == "OK")
-                        Response.Redirect("CPRSNote.aspx?localpid="+ID);//("CPRSNoteConfirmation.aspx");
+                        Response.Redirect("CPRSNote.aspx?localpid="+ID+"&PatientSID="+PatientSID);//("CPRSNoteConfirmation.aspx");
                 }
   
 
@@ -96,14 +96,14 @@ namespace URF
                             
 
                             Session["CPRSLogin"] = "OK";
-                            Response.Redirect("CPRSNote.aspx?localpid="+ID, false);
+                            Response.Redirect("CPRSNote.aspx?localpid="+ID+"&PatientSID="+PatientSID, false);
                         }
                         else
                         {
                             lblError.Visible = true;
                             lblError.ForeColor = System.Drawing.Color.Red;
                             lblError.Text = "Login Fail! Please reenter your username and password and try again.<br />";
-                            lblError.Text += "Is your password expired? Please login to the REAL CPRS to change your password.<br />";
+                            lblError.Text += "Is your password expired? Please login to the CPRS Application to change your password.<br />";
                         }
                     }
                     catch(Exception ex)

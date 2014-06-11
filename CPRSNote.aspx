@@ -1,10 +1,12 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="CPRSNote.aspx.cs" Inherits="GICprsLogin.CPRSNote" MasterPageFile="Site.Master" %>
+﻿
+<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="CPRSNote.aspx.cs" Inherits="GICprsLogin.CPRSNote" MasterPageFile="Site.Master" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="FeaturedContent" runat="server">
     </asp:Content>
 
-<asp:Content ID="Content3" runat="server" contentplaceholderid="MainContent">
+<asp:Content ID="Content3" runat="server" contentplaceholderid="MainContent">  
     <asp:Label ID="Label1" runat="server" Text="Note Title: 10-10M"></asp:Label>
     <br />
     <asp:Label ID="Label2" runat="server" Text="Author:"></asp:Label>
@@ -56,8 +58,29 @@
         <asp:ListItem>sofosbuvir/simeprevir</asp:ListItem>
         <asp:ListItem>simeprevir/ribavirin/PEG-IFN</asp:ListItem>
     </asp:DropDownList> 
-     Liver biopsy results:
-    <asp:DropDownList ID="BiopsyResults" AutoPostBack="true" runat="server"  EnableViewState="true" OnSelectedIndexChanged="BiopsyResults_SelectedIndexChanged">
+    <br />    
+     Liver biopsy done:
+    <asp:DropDownList ID="drpLiverBiopsy" runat="server" AutoPostBack="true" EnableViewState="true" OnSelectedIndexChanged="BiopsyResults_SelectedIndexChanged">
+        <asp:ListItem Selected="True"> </asp:ListItem>
+        <asp:ListItem>The liver biopsy results were </asp:ListItem>
+        <asp:ListItem>Patient has not had a liver biopsy. </asp:ListItem>
+    </asp:DropDownList> 
+    <%--<br />--%>    
+    <%--<input type="checkbox" runat="server" id="cbLiverBiopsy" value=" ">--%>
+    <%--<input type="hidden" id="hide" name="user" />--%>
+    <%--<asp:CheckBox ID ="cbLiverBiopsy" runat="server" Checked="false" OnCheckedChanged="BiopsyResults_SelectedIndexChanged"/>--%>
+    <asp:HiddenField ID="hide" runat="server"/> 
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            $("#cbLiverBiopsy").click(function () {
+                $("#hide").val("The liver biopsy results were ");
+            });
+        });
+
+    </script>
+    Liver biopsy results:
+    <asp:DropDownList ID="drpBiopsyResults" AutoPostBack="true" runat="server"  EnableViewState="true" OnSelectedIndexChanged="BiopsyResults_SelectedIndexChanged">
         <%--OnSelectedIndexChanged="BiopsyResults_SelectedIndexChanged"--%>
         <asp:ListItem Selected="True"> </asp:ListItem>
         <asp:ListItem>none</asp:ListItem>
@@ -116,13 +139,14 @@
     <asp:Button ID="cancel" runat="server" Text="Cancel" OnClick="cancel_Click" />
     <br />
     <script>
+
         $(function () {
 
             $('#MainContent_submit').on("click",NoteConfirm);
         });
 
         function NoteConfirm(event) {
-            var confirmed = confirm("Upon clicking OK, this note will be submitted to CPRS. Cancel will return yo to the note text for editing.\n Do you want to submit this note to CPRS?");
+            var confirmed = confirm("Upon clicking OK, this note will be submitted to CPRS. Cancel will return you to the note text for editing.\n Do you want to submit this note to CPRS?");
             if (!confirmed) {
                 event.preventDefault();
             }

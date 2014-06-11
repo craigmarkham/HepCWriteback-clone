@@ -11,7 +11,18 @@
     <webopt:BundleReference runat="server" Path="~/Content/css" /> 
     <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
     <meta name="viewport" content="width=device-width" />
-    <asp:ContentPlaceHolder runat="server" ID="HeadContent" />
+    <asp:ContentPlaceHolder runat="server" ID="HeadContent"> 
+         <script type="text/javascript">
+
+             $(document).ready(function () {
+                 $("#cbLiverBiopsy").click(function () {
+                     $("#hide").val("The liver biopsy results were ");
+                 });
+             });
+
+    </script>
+    </asp:ContentPlaceHolder>
+
 </head>
 <body>
     <form runat="server">
