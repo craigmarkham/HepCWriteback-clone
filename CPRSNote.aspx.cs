@@ -116,9 +116,12 @@ namespace GICprsLogin
                 string doses = drpDoses.Text;
                 string biopsyDone = drpLiverBiopsy.Text;
                 //string biopsyDone = hide.Value.ToString(); 
-
-
-
+                 string physExam = null;
+             if(PhysicalExam.Checked == true)
+             {
+                 physExam = "PHYSICAL EXAM:\nGeneral:\n HEENT:\n Neck:\n Cardiac:\n Lungs:\n ABD:\n Liver:\n GU:\n EXT:\n Neuro:\n Skin:\n";
+             }
+            
                 txtboxNote.Text = patient.name.ToString() + " is currently on week " + week +
                     " of a planned total duration of therapy of " + duration + " weeks for treatment of cHCV genotype " + genotype + " with \n" + drug +
                     ". " + biopsyDone + br +
@@ -126,7 +129,8 @@ namespace GICprsLogin
                     " \nPatient "+ physical +" physical adverse drug effects " +
                     " \nPatient " + mental + " mental health adverse drug effects " +
                     " \nSince last visit, adherence to therapy has been " + therapy + 
-                    " as patient reports a total of " + doses +" missed doses.";
+                    " as patient reports a total of " + doses +" missed doses.\n"
+                    + physExam;
             }        
         }
             catch(NullReferenceException ex)
@@ -138,21 +142,20 @@ namespace GICprsLogin
         {
             string connString = ConfigurationManager.ConnectionStrings["CDSTProductionConnectionString"].ConnectionString;
             SqlConnection Conn = null;
-            //try
-            //{
+            
+
                 var patient = wsEMR.select(Request.QueryString["localPid"]);
                 Conn = new SqlConnection(connString);
-                Conn.Open();
-                //string es = "INSERT INTO HepCTracking(PatientSID, PatientIEN, PatientName, CycleWeek, PlannedDuration, TreatmentRegimen, BiopsyResults, AdherenceToTherapy, MissedDoses) VALUES('" + Request.QueryString["PatientSID"].ToString() + "','" + Request.QueryString["localPID"].ToString() + "','" + patient.name.ToString() + "','" + drpWeek.SelectedValue + "','" + drpDuration.SelectedValue + "','" + drpDrug.SelectedValue + "','" + drpBiopsyResults.SelectedValue + "','" + drpTherapy.SelectedValue + "','" + drpDoses.SelectedValue + "')";
-                    
+                Conn.Open();                 
                 using (SqlCommand cmd = new SqlCommand())
                 {
                     cmd.Connection = Conn;
                     cmd.CommandType = CommandType.Text;
-                    cmd.CommandText = "INSERT INTO HepCTracking(PatientSID, PatientIEN, PatientName, CycleWeek, PlannedDuration, TreatmentRegimen, BiopsyResults, AdherenceToTherapy, MissedDoses, NoteDate) VALUES(@PatientSID, @PatientIEN, @PatientName, @CycleWeek, @PlannedDuration, @TreatmentRegimen, @BiopsyResults, @AdherenceToTherapy, @MissedDoses, @NoteDate)";
+                    cmd.CommandText = "INSERT INTO HepCTracking(PatientSID, PatientIEN, PatientName, Author, CycleWeek, PlannedDuration, TreatmentRegimen, BiopsyResults, AdherenceToTherapy, MissedDoses, NoteDate) VALUES(@PatientSID, @PatientIEN, @PatientName, @Author, @CycleWeek, @PlannedDuration, @TreatmentRegimen, @BiopsyResults, @AdherenceToTherapy, @MissedDoses, @NoteDate)";
                     cmd.Parameters.AddWithValue("@PatientSID", Request.QueryString["PatientSID"]);
                     cmd.Parameters.AddWithValue("@PatientIEN", Request.QueryString["localPID"]);
                     cmd.Parameters.AddWithValue("@PatientName", patient.name.ToString());
+                    cmd.Parameters.AddWithValue("@Author", Session[SessionVariables.Name].ToString());
                     cmd.Parameters.AddWithValue("@CycleWeek", drpWeek.SelectedValue);
                     cmd.Parameters.AddWithValue("@PlannedDuration", drpDuration.SelectedValue);
                     cmd.Parameters.AddWithValue("@TreatmentRegimen", drpDrug.SelectedValue);
@@ -163,18 +166,7 @@ namespace GICprsLogin
                     cmd.ExecuteReader();
 
                 }
-            //}
-            //catch (Exception ex)
-            //{
-            //    Response.Write("SQL Connection Error!");
-            //}
-            //finally
-            //{
-            //    if (Conn != null)
-            //    {
-            //        Conn.Close();
-            //    }
-            //}        
+              
                 if (Conn != null)
                 {
                     Conn.Close();

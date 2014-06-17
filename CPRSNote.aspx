@@ -7,7 +7,7 @@
     </asp:Content>
 
 <asp:Content ID="Content3" runat="server" contentplaceholderid="MainContent">  
-    <asp:Label ID="Label1" runat="server" Text="Note Title: 10-10M"></asp:Label>
+    <asp:Label ID="Label1" runat="server" Text="Note Title: HEPATITIS C TREATMENT FOLLOW-UP"></asp:Label>
     <br />
     <asp:Label ID="Label2" runat="server" Text="Author:"></asp:Label>
 &nbsp;<asp:Label ID="author" runat="server" Text=" "></asp:Label>
@@ -124,6 +124,9 @@
         <asp:ListItem>6</asp:ListItem>
         <asp:ListItem>7</asp:ListItem>
         </asp:DropDownList>
+    <br />
+    Click here to document Physical Exam(you can edit in the space below): 
+    <asp:CheckBox ID="PhysicalExam" runat="server" AutoPostBack ="true" OnCheckedChanged="BiopsyResults_SelectedIndexChanged" />
     <br /><br />
     Enter note text below:<br />
     <asp:TextBox ID="txtboxNote" runat="server" Height="226px" Width="601px" TextMode="MultiLine"></asp:TextBox>
