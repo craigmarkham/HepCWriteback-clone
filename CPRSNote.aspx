@@ -7,7 +7,10 @@
     </asp:Content>
 
 <asp:Content ID="Content3" runat="server" contentplaceholderid="MainContent">  
-    <asp:Label ID="Label1" runat="server" Text="Note Title: HEPATITIS C TREATMENT FOLLOW-UP"></asp:Label>
+   <b>Time remaining until auto-logout:</b> <asp:Label ID="Label1" runat="server" Text="20"/> minute(s).<br /><br />
+    <asp:Timer ID="Timer1" runat="server" Interval="60000" ontick="Timer1_Tick">
+    </asp:Timer>
+    <asp:Label ID="Label" runat="server" Text="Note Title: HEPATITIS C TREATMENT FOLLOW-UP"></asp:Label>
     <br />
     <asp:Label ID="Label2" runat="server" Text="Author:"></asp:Label>
 &nbsp;<asp:Label ID="author" runat="server" Text=" "></asp:Label>
@@ -78,6 +81,15 @@
             });
         });
 
+        function countdown() {
+            seconds = document.getElementById("timerLabel").innerHTML;
+            if (seconds > 0) {
+                document.getElementById("timerLabel").innerHTML = seconds - 1;
+                setTimeout("countdown()", 1000);
+            }
+        }
+
+        setTimeout("countdown()", 1000);
     </script>
     Liver biopsy results:
     <asp:DropDownList ID="drpBiopsyResults" AutoPostBack="true" runat="server"  EnableViewState="true" OnSelectedIndexChanged="BiopsyResults_SelectedIndexChanged">
@@ -127,7 +139,64 @@
     <br />
     Click here to document Physical Exam(you can edit in the space below): 
     <asp:CheckBox ID="PhysicalExam" runat="server" AutoPostBack ="true" OnCheckedChanged="BiopsyResults_SelectedIndexChanged" />
-    <br /><br />
+    <br />
+    <asp:Label ID="General" runat="server" Visible="false" Text="General:" Font-Bold="true"> </asp:Label> 
+    <asp:CheckBox ID="Generalcb1" runat="server" visible="false" AutoPostBack="true" OnCheckedChanged="BiopsyResults_SelectedIndexChanged" Text=" Alert and Oriented"> </asp:CheckBox>
+    <asp:CheckBox ID="Generalcb2" runat="server" visible="false" AutoPostBack="true" OnCheckedChanged="BiopsyResults_SelectedIndexChanged" Text=" Other (specify)"> </asp:CheckBox>
+    <br />
+    <asp:Label ID="HEENT" runat="server" Visible="false" Text="HEENT:" Font-Bold="true"></asp:Label>
+     <asp:CheckBox ID="HEENTcb1" runat="server" visible="false" AutoPostBack="true" OnCheckedChanged="BiopsyResults_SelectedIndexChanged" Text=" Alert and Oriented"> </asp:CheckBox>
+    <asp:CheckBox ID="HEENTcb2" runat="server" visible="false" AutoPostBack="true" OnCheckedChanged="BiopsyResults_SelectedIndexChanged" Text=" Other (specify)"> </asp:CheckBox>  
+    <br />
+    <asp:Label ID="Neck" runat="server" Visible="false" Text="Neck:" Font-Bold="true"></asp:Label>
+     <asp:CheckBox ID="Neckcb1" runat="server" visible="false" AutoPostBack="true" OnCheckedChanged="BiopsyResults_SelectedIndexChanged" Text=" Alert and Oriented"> </asp:CheckBox>
+    <asp:CheckBox ID="Neckcb2" runat="server" visible="false" AutoPostBack="true" OnCheckedChanged="BiopsyResults_SelectedIndexChanged" Text=" Other (specify)"> </asp:CheckBox>
+    <asp:CheckBox ID="Neckcb3" runat="server" visible="false" AutoPostBack="true" OnCheckedChanged="BiopsyResults_SelectedIndexChanged" Text=" Other (specify)"> </asp:CheckBox>
+    <br />
+    <asp:Label ID="Cardiac" runat="server" Visible="false" Text="Cardiac:" Font-Bold="true"></asp:Label>
+     <asp:CheckBox ID="Cardiaccb1" runat="server" visible="false" AutoPostBack="true" OnCheckedChanged="BiopsyResults_SelectedIndexChanged" Text=" Alert and Oriented"> </asp:CheckBox>
+    <asp:CheckBox ID="Cardiaccb2" runat="server" visible="false" AutoPostBack="true" OnCheckedChanged="BiopsyResults_SelectedIndexChanged" Text=" Other (specify)"> </asp:CheckBox>
+    <br />
+    <asp:Label ID="Lungs" runat="server" Visible="false" Text="Lungs:" Font-Bold="true"></asp:Label>
+     <asp:CheckBox ID="Lungscb1" runat="server" visible="false" AutoPostBack="true" OnCheckedChanged="BiopsyResults_SelectedIndexChanged" Text=" Alert and Oriented"> </asp:CheckBox>
+    <asp:CheckBox ID="Lungscb2" runat="server" visible="false" AutoPostBack="true" OnCheckedChanged="BiopsyResults_SelectedIndexChanged" Text=" Other (specify)"> </asp:CheckBox>
+    <br />
+    <asp:Label ID="ABD" runat="server" Visible="false" Text="ABD:" Font-Bold="true"></asp:Label>
+    <asp:CheckBox ID="ABDcb1" runat="server" visible="false" AutoPostBack="true" OnCheckedChanged="BiopsyResults_SelectedIndexChanged" Text=" Alert and Oriented"> </asp:CheckBox>
+    <asp:CheckBox ID="ABDcb2" runat="server" visible="false" AutoPostBack="true" OnCheckedChanged="BiopsyResults_SelectedIndexChanged" Text=" Other (specify)"> </asp:CheckBox>
+    <asp:CheckBox ID="ABDcb3" runat="server" visible="false" AutoPostBack="true" OnCheckedChanged="BiopsyResults_SelectedIndexChanged" Text=" Alert and Oriented"> </asp:CheckBox>
+    <asp:CheckBox ID="ABDcb4" runat="server" visible="false" AutoPostBack="true" OnCheckedChanged="BiopsyResults_SelectedIndexChanged" Text=" Other (specify)"> </asp:CheckBox>
+    <asp:CheckBox ID="ABDcb5" runat="server" visible="false" AutoPostBack="true" OnCheckedChanged="BiopsyResults_SelectedIndexChanged" Text=" Alert and Oriented"> </asp:CheckBox>
+    <asp:CheckBox ID="ABDcb6" runat="server" visible="false" AutoPostBack="true" OnCheckedChanged="BiopsyResults_SelectedIndexChanged" Text=" Other (specify)"> </asp:CheckBox>
+    <asp:CheckBox ID="ABDcb7" runat="server" visible="false" AutoPostBack="true" OnCheckedChanged="BiopsyResults_SelectedIndexChanged" Text=" Alert and Oriented"> </asp:CheckBox>
+    <asp:CheckBox ID="ABDcb8" runat="server" visible="false" AutoPostBack="true" OnCheckedChanged="BiopsyResults_SelectedIndexChanged" Text=" Other (specify)"> </asp:CheckBox>
+    <br />
+    <asp:Label ID="Liver" runat="server" Visible="false" Text="Liver" Font-Bold="true"></asp:Label>
+    <asp:CheckBox ID="Livercb1" runat="server" visible="false" AutoPostBack="true" OnCheckedChanged="BiopsyResults_SelectedIndexChanged" Text=" Alert and Oriented"> </asp:CheckBox>
+    <asp:CheckBox ID="Livercb2" runat="server" visible="false" AutoPostBack="true" OnCheckedChanged="BiopsyResults_SelectedIndexChanged" Text=" Other (specify)"> </asp:CheckBox>
+    <asp:CheckBox ID="Livercb3" runat="server" visible="false" AutoPostBack="true" OnCheckedChanged="BiopsyResults_SelectedIndexChanged" Text=" Other (specify)"> </asp:CheckBox>
+    <asp:CheckBox ID="Livercb4" runat="server" visible="false" AutoPostBack="true" OnCheckedChanged="BiopsyResults_SelectedIndexChanged" Text=" Other (specify)"> </asp:CheckBox>
+     <br />
+    <asp:Label ID="GU" runat="server" Visible="false" Text="GU" Font-Bold="true"></asp:Label>
+   
+     <br />
+    <asp:Label ID="EXT" runat="server" Visible="false" Text="EXT:" Font-Bold="true"></asp:Label>
+    <asp:CheckBox ID="EXTcb1" runat="server" visible="false" AutoPostBack="true" OnCheckedChanged="BiopsyResults_SelectedIndexChanged" Text=" Alert and Oriented"> </asp:CheckBox>
+    <asp:CheckBox ID="EXTcb2" runat="server" visible="false" AutoPostBack="true" OnCheckedChanged="BiopsyResults_SelectedIndexChanged" Text=" Other (specify)"> </asp:CheckBox>
+    <asp:CheckBox ID="EXTcb3" runat="server" visible="false" AutoPostBack="true" OnCheckedChanged="BiopsyResults_SelectedIndexChanged" Text=" Other (specify)"> </asp:CheckBox>
+    
+    <br />
+    <asp:Label ID="Neuro" runat="server" Visible="false" Text="Neuro:" Font-Bold="true"></asp:Label>
+    <asp:CheckBox ID="Neurocb1" runat="server" visible="false" AutoPostBack="true" OnCheckedChanged="BiopsyResults_SelectedIndexChanged" Text=" Alert and Oriented"> </asp:CheckBox>
+    <asp:CheckBox ID="Neurocb2" runat="server" visible="false" AutoPostBack="true" OnCheckedChanged="BiopsyResults_SelectedIndexChanged" Text=" Other (specify)"> </asp:CheckBox>
+     <br />
+    <asp:Label ID="Skin" runat="server" Visible="false" Text="Skin:" Font-Bold="true"></asp:Label>
+    <asp:CheckBox ID="Skincb1" runat="server" visible="false" AutoPostBack="true" OnCheckedChanged="BiopsyResults_SelectedIndexChanged" Text=" Alert and Oriented"> </asp:CheckBox>
+    <asp:CheckBox ID="Skincb2" runat="server" visible="false" AutoPostBack="true" OnCheckedChanged="BiopsyResults_SelectedIndexChanged" Text=" Other (specify)"> </asp:CheckBox>
+    <asp:CheckBox ID="Skincb3" runat="server" visible="false" AutoPostBack="true" OnCheckedChanged="BiopsyResults_SelectedIndexChanged" Text=" Alert and Oriented"> </asp:CheckBox>
+    <asp:CheckBox ID="Skincb4" runat="server" visible="false" AutoPostBack="true" OnCheckedChanged="BiopsyResults_SelectedIndexChanged" Text=" Other (specify)"> </asp:CheckBox>
+     
+    <br />
     Enter note text below:<br />
     <asp:TextBox ID="txtboxNote" runat="server" Height="226px" Width="601px" TextMode="MultiLine"></asp:TextBox>
     <br />

@@ -13,6 +13,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Configuration;
 using System.Data.SqlClient;
 using System.Data;
+using System.Timers;
+using System.Windows.Forms;
 
 namespace GICprsLogin
 {
@@ -41,7 +43,6 @@ namespace GICprsLogin
         public string HepCQualitative { get; set; }   
     }
 
- 
     //public class CohortDBContext : DbContext
     //{
     //    public DbSet<PatientCohorts> PatientCohorts { get; set; }
@@ -59,16 +60,68 @@ namespace GICprsLogin
     public partial class CPRSNote : System.Web.UI.Page
     {
         EmrSvc wsEMR;
-        protected void Page_Load(object sender, EventArgs e)
+        System.Timers.Timer aTimer = new System.Timers.Timer();
+                  
+        public void Page_Load(object sender, EventArgs e)
         {
             wsEMR = (EmrSvc)Session[SessionVariables.Service];
             
             var patient = wsEMR.select(Request.QueryString["localPid"]);
+            
             author.Text = Session[SessionVariables.Name].ToString();
             Patient.Text = patient.patientName;
-           
+            
+            //var ID = Request.QueryString["localpid"];
+            //var PatientSID = Request.QueryString["PatientSID"];
+            //System.Timers.Timer aTimer = new System.Timers.Timer();
+            //aTimer.Elapsed += new ElapsedEventHandler(OnTimedEvent);
+            //aTimer.Interval = 35000;
+            //aTimer.Enabled = true;
+            //aTimer.Start();
+            
+            //if (aTimer.Interval < 30000)
+            //{
+            //    MessageBox.Show("This session is ending in two minutes. Be sure to submit your note to CPRS, or you will be redirected to the login screen");
+            //}
+
+            //if (aTimer.Interval < 0001)
+            //{
+            //    aTimer.Stop();
+            //    aTimer.Enabled = false;
+            //    MessageBox.Show("This session has ended. You will now be redirected to the CPRS Login Page");
+            //    Session.Abandon();
+            //    wsEMR.disconnect();
+            //    Session.Contents.RemoveAll();
+            //    Response.Redirect("CPRSLogin.aspx?localpid=" + ID + "&PatientSID=" + PatientSID);
+            //}           
         }
-        
+
+        protected void Timer1_Tick(object sender, EventArgs e)
+        {
+            var ID = Request.QueryString["localpid"];
+            var PatientSID = Request.QueryString["PatientSID"];
+            int minutes = int.Parse(Label1.Text);
+            if (minutes != 0)
+            {
+                Label1.Text = (minutes - 1).ToString();
+
+            }
+            else
+            {
+                Session.Abandon();
+                wsEMR.disconnect();
+                Session.Contents.RemoveAll();
+                Timer1.Enabled = false;
+                Response.Redirect("CPRSLogin.aspx?localpid=" + ID + "&PatientSID=" + PatientSID);
+                //Response.Redirect("http://www.google.com");
+                MessageBox.Show("This Session has expired. You will now be redirected to the login page.");
+            }
+        }
+    
+        private static void OnTimedEvent(object source, ElapsedEventArgs e)
+        {
+                       
+        }
        
         private void cbLiverBiopsy_Checked(object sender, EventArgs e)
         {
@@ -117,9 +170,33 @@ namespace GICprsLogin
                 string biopsyDone = drpLiverBiopsy.Text;
                 //string biopsyDone = hide.Value.ToString(); 
                  string physExam = null;
+                 string GeneralcbAlert = null;
+                 string GeneralcbOther = null;
              if(PhysicalExam.Checked == true)
              {
-                 physExam = "PHYSICAL EXAM:\nGeneral:\n HEENT:\n Neck:\n Cardiac:\n Lungs:\n ABD:\n Liver:\n GU:\n EXT:\n Neuro:\n Skin:\n";
+                 //physExam = "PHYSICAL EXAM:\nGeneral:\n HEENT:\n Neck:\n Cardiac:\n Lungs:\n ABD:\n Liver:\n GU:\n EXT:\n Neuro:\n Skin:\n";
+                 General.Visible = true;
+                 Generalcb1.Visible = true;
+                 Generalcb2.Visible = true;
+                 HEENT.Visible = true;
+                 Neck.Visible = true;
+                 Cardiac.Visible = true;
+                 Lungs.Visible = true;
+                 ABD.Visible = true;
+                 Liver.Visible = true;
+                 GU.Visible = true;
+                 EXT.Visible = true;
+                 Neuro.Visible = true;
+                 Skin.Visible = true;
+
+                 if (Generalcb1.Checked == true)
+                 {
+                     GeneralcbAlert ="General: "+ Generalcb1.Text;
+                 }
+                 if (Generalcb2.Checked == true)
+                 {
+                     GeneralcbOther = "General: " + Generalcb2.Text;
+                 }
              }
             
                 txtboxNote.Text = patient.name.ToString() + " is currently on week " + week +
@@ -130,7 +207,7 @@ namespace GICprsLogin
                     " \nPatient " + mental + " mental health adverse drug effects " +
                     " \nSince last visit, adherence to therapy has been " + therapy + 
                     " as patient reports a total of " + doses +" missed doses.\n"
-                    + physExam;
+                    + physExam + GeneralcbAlert +"\n"+ GeneralcbOther;
             }        
         }
             catch(NullReferenceException ex)
@@ -199,6 +276,7 @@ namespace GICprsLogin
         protected void cancel_Click(object sender, EventArgs e)
         {
             Session.Abandon();
+            wsEMR.disconnect();
             Session.Contents.RemoveAll();
             Response.Redirect("https://mcad.v10.med.va.gov/CDSTTools");
         }
