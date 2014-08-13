@@ -171,33 +171,33 @@ namespace GICprsLogin
                 //string biopsyDone = hide.Value.ToString(); 
                  string physExam = null;
                  string GeneralcbAlert = null;
-                 string GeneralcbOther = null;
-             if(PhysicalExam.Checked == true)
-             {
-                 //physExam = "PHYSICAL EXAM:\nGeneral:\n HEENT:\n Neck:\n Cardiac:\n Lungs:\n ABD:\n Liver:\n GU:\n EXT:\n Neuro:\n Skin:\n";
-                 General.Visible = true;
-                 Generalcb1.Visible = true;
-                 Generalcb2.Visible = true;
-                 HEENT.Visible = true;
-                 Neck.Visible = true;
-                 Cardiac.Visible = true;
-                 Lungs.Visible = true;
-                 ABD.Visible = true;
-                 Liver.Visible = true;
-                 GU.Visible = true;
-                 EXT.Visible = true;
-                 Neuro.Visible = true;
-                 Skin.Visible = true;
+             //    string GeneralcbOther = null;
+             //if(PhysicalExam.Checked == true)
+             //{
+             //    //physExam = "PHYSICAL EXAM:\nGeneral:\n HEENT:\n Neck:\n Cardiac:\n Lungs:\n ABD:\n Liver:\n GU:\n EXT:\n Neuro:\n Skin:\n";
+             //    General.Visible = true;
+             //    Generalcb1.Visible = true;
+             //    Generalcb2.Visible = true;
+             //    HEENT.Visible = true;
+             //    Neck.Visible = true;
+             //    Cardiac.Visible = true;
+             //    Lungs.Visible = true;
+             //    ABD.Visible = true;
+             //    Liver.Visible = true;
+             //    GU.Visible = true;
+             //    EXT.Visible = true;
+             //    Neuro.Visible = true;
+             //    Skin.Visible = true;
 
-                 if (Generalcb1.Checked == true)
-                 {
-                     GeneralcbAlert ="General: "+ Generalcb1.Text;
-                 }
-                 if (Generalcb2.Checked == true)
-                 {
-                     GeneralcbOther = "General: " + Generalcb2.Text;
-                 }
-             }
+             //    if (Generalcb1.Checked == true)
+             //    {
+             //        GeneralcbAlert ="General: "+ Generalcb1.Text;
+             //    }
+             //    if (Generalcb2.Checked == true)
+             //    {
+             //        GeneralcbOther = "General: " + Generalcb2.Text;
+             //    }
+             //}
             
                 txtboxNote.Text = patient.name.ToString() + " is currently on week " + week +
                     " of a planned total duration of therapy of " + duration + " weeks for treatment of cHCV genotype " + genotype + " with \n" + drug +
@@ -207,7 +207,7 @@ namespace GICprsLogin
                     " \nPatient " + mental + " mental health adverse drug effects " +
                     " \nSince last visit, adherence to therapy has been " + therapy + 
                     " as patient reports a total of " + doses +" missed doses.\n"
-                    + physExam + GeneralcbAlert +"\n"+ GeneralcbOther;
+                    + physExam + GeneralcbAlert + "\n";// +GeneralcbOther;
             }        
         }
             catch(NullReferenceException ex)

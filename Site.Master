@@ -51,7 +51,7 @@
         <div class="content-wrapper">
             <div class="float-left">
                 <p class="site-title">
-                    <a runat="server" href="~/">CDST Tools</a>
+                    <a runat="server" href="https://mcad.v10.med.va.gov/CDSTTools">CDST Tools</a>
                 </p>
             </div>
             <div class="float-right">
